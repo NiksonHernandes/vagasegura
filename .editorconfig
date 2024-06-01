@@ -1,0 +1,11 @@
+root = true
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# charset 
+[*]
+charset = utf-8
+
+# Indexação (no size specified)
+indent_style = tab
