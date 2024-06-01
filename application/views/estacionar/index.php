@@ -141,7 +141,11 @@
               <div class="row">
             <!-- Veículo pequeno -->
             <div class="col-lg-6 col-md-4 col-6">
-                <p class="text-center text-uppercase small" style="font-weight: 500; font-size: 0.9em">Veículo pequeno<?php echo ($numero_vagas_pequeno->precificacao_ativa == 0 ? '<span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-ban"></i>&nbsp;Desativado</span>' : ''); ?></p>
+                    <p class="text-center text-uppercase small" style="font-weight: 500; font-size: 1em">
+                        Veículo pequeno 
+                        <?php echo "(" . count($vagas_ocupadas_pequeno) . "/" . $numero_vagas_pequeno->vagas . ")"; ?>
+                        <?php echo ($numero_vagas_pequeno->precificacao_ativa == 0 ? '<span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-ban"></i>&nbsp;Desativado</span>' : ''); ?>
+                    </p>
                                 <div class="widget social-widget">
                                     <div class="widget-body text-center">
                                         <div class="content">    
@@ -192,7 +196,10 @@
                   </div>
                   <!-- Veículo médio -->
                   <div class="col-lg-6 col-md-4 col-6">
-                   <p class="text-center text-uppercase small" style="font-weight: 500; font-size: 0.9em">Veículo médio<?php echo ($numero_vagas_medio->precificacao_ativa == 0 ? '<span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-ban"></i>&nbsp;Desativado</span>' : ''); ?></p>
+                    <p class="text-center text-uppercase small" style="font-weight: 500; font-size: 1em">Veículo médio
+                        <?php echo "(" . count($vagas_ocupadas_medio) . "/" . $numero_vagas_medio->vagas . ")"; ?>
+                        <?php echo ($numero_vagas_medio->precificacao_ativa == 0 ? '<span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-ban"></i>&nbsp;Desativado</span>' : ''); ?>
+                    </p>
                                 <div class="widget social-widget">
                                     <div class="widget-body text-center">
                                         <div class="content">  
@@ -245,7 +252,10 @@
 
                             <!-- Veículo grande -->
                   <div class="col-lg-6 col-md-4 col-6">
-                   <p class="text-center text-uppercase small" style="font-weight: 500; font-size: 0.9em">Veículo grande<?php echo ($numero_vagas_grande->precificacao_ativa == 0 ? '<span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-ban"></i>&nbsp;Desativado</span>' : ''); ?></p>
+                    <p class="text-center text-uppercase small" style="font-weight: 500; font-size: 1em">Veículo grande
+                        <?php echo "(" . count($vagas_ocupadas_grande) . "/" . $numero_vagas_grande->vagas . ")"; ?>
+                        <?php echo ($numero_vagas_grande->precificacao_ativa == 0 ? '<span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-ban"></i>&nbsp;Desativado</span>' : ''); ?>
+                    </p>
                                 <div class="widget social-widget">
                                     <div class="widget-body text-center">
                                         <div class="content"> 
@@ -298,7 +308,10 @@
 
                          <!-- Veículo Moto -->
                   <div class="col-lg-6 col-md-4 col-6">
-                   <p class="text-center text-uppercase small" style="font-weight: 500; font-size: 0.9em">Veículo moto<?php echo ($numero_vagas_moto->precificacao_ativa == 0 ? '<span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-ban"></i>&nbsp;Desativado</span>' : ''); ?></p>
+                    <p class="text-center text-uppercase small" style="font-weight: 500; font-size: 1em">Veículo moto
+                        <?php echo "(" . count($vagas_ocupadas_moto) . "/" . $numero_vagas_moto->vagas . ")"; ?>
+                        <?php echo ($numero_vagas_moto->precificacao_ativa == 0 ? '<span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-ban"></i>&nbsp;Desativado</span>' : ''); ?>
+                    </p>
                                 <div class="widget social-widget">
                                     <div class="widget-body text-center">
                                         <div class="content"> 
@@ -360,15 +373,5 @@
 </div>
 
 
-</div>
-    </div>
-
-    <footer class="footer">
-        <div class="w-100 clearfix">
-            <span class="text-center text-sm-left d-md-inline-block">Copyright © <?php echo date('Y'); ?> Vaga Segura. Projeto Eng. de Software.</span>
-        </div>
-    </footer>
-    
-</div>
 
 

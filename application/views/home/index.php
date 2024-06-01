@@ -181,7 +181,7 @@
 
                             <!-- Veículo grande -->
                   <div class="col-lg-6 col-md-4 col-6">
-                   <p class="text-center text-uppercase small" style="font-weight: 500; font-size: 1em">Veículo grande
+                    <p class="text-center text-uppercase small" style="font-weight: 500; font-size: 1em">Veículo grande
                         <?php echo "(" . count($vagas_ocupadas_grande) . "/" . $numero_vagas_grande->vagas . ")"; ?>
                         <?php echo ($numero_vagas_grande->precificacao_ativa == 0 ? '<span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-ban"></i>&nbsp;Desativado</span>' : ''); ?>
                     </p>
@@ -237,7 +237,7 @@
 
                          <!-- Veículo Moto -->
                   <div class="col-lg-6 col-md-4 col-6">
-                   <p class="text-center text-uppercase small" style="font-weight: 500; font-size: 1em">Veículo moto
+                    <p class="text-center text-uppercase small" style="font-weight: 500; font-size: 1em">Veículo moto
                         <?php echo "(" . count($vagas_ocupadas_moto) . "/" . $numero_vagas_moto->vagas . ")"; ?>
                         <?php echo ($numero_vagas_moto->precificacao_ativa == 0 ? '<span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-ban"></i>&nbsp;Desativado</span>' : ''); ?>
                     </p>
