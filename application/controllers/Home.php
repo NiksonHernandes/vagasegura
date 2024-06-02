@@ -10,11 +10,14 @@ class Home extends CI_Controller {
            {
              redirect('login');
            }
-           
     }
 
     public function index() {
    
+        $this->load->model('estacionar_model');
+
+        $estacionados = $this->estacionar_model->get_all();
+
         $data = array(
 
             'titulo' => 'Controle das vagas do estacionamento',
@@ -32,6 +35,7 @@ class Home extends CI_Controller {
                 'plugins/datatables.net/js/estacionamento.js',
                 'dist/js/util.js',
              ),
+             'estacionados' => $estacionados,
 
             /*Inicio numero vagas por categoria */
             'numero_vagas_pequeno' => $this->estacionar_model->get_numero_vagas(1), // veiculo pequeno
@@ -100,8 +104,6 @@ class Home extends CI_Controller {
             if ($notificacoes > 0) {
 
                 $data['notificacoes'] = $notificacoes;
-
-
             }
          
             $this->load->view('layout/header', $data);

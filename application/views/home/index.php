@@ -86,26 +86,39 @@
                                 <?php
                                     $ocupadas = array();
                                     $placas = array();
+                                    $id_veiculo_list = array();                        
 
                                     foreach ($vagas_ocupadas_pequeno as $vaga) {
-
                                         $ocupadas [] = $vaga->estacionar_numero_vaga;
+                                        $id_veiculo_list[] = $vaga->estacionar_id;
                                         $placas [$vaga->estacionar_numero_vaga] = $vaga->estacionar_placa_veiculo;
                                     }
+
                                 ?>
 
                                 <?php for ($i = 1; $i <= $numero_vagas_pequeno->vagas; $i++) : ?>
 
                                 <li class="list-inline-item">
                                     <?php if(in_array($i, $ocupadas)): ?>
-                                        
-                                    <div class="widget social-widget vaga" style="background-color: #ec5353; color: white">
-                                        <div class="widget-body">
-                                            <div data-toggle="tooltip" data-placement="bottom" title="Placa:&nbsp;<?php echo $placas[$i] ?>" class="content">
-                                                <i class="fas fa-car-side fa-lg"></i>
+
+                                        <?php
+                                        // Encontrando o índice correto do ID do veículo no array $id_veiculo_list
+                                        $indice = array_search($i, $ocupadas);
+                                        // Obtendo o ID do veículo correspondente ao número da vaga
+                                        $id_veiculo = $id_veiculo_list[$indice];
+                                        $placa = $placas[$i];
+                                        ?>
+                                                                        
+                                        <a href="<?php echo base_url('estacionar/core/' . $id_veiculo); ?>" style="text-decoration: none;">
+                                            <div class="widget social-widget vaga" style="background-color: #ec5353; color: white">
+                                                <div class="widget-body">
+                                                    <div data-toggle="tooltip" data-placement="bottom" title="Placa:&nbsp;<?php echo $placas[$i] ?>" class="content">
+                                                        <i class="fas fa-car-side fa-lg"></i>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        </a>
+
                                     <?php else: ?>
                                         <a href="<?php echo base_url('/estacionar/core?vaga=' . $i); ?>" class="widget social-widget vaga" style="background-color: <?php echo ($numero_vagas_pequeno->precificacao_ativa == 0 ? '#E5F9FF' : '#5dd55d;'); ?>; color: white; display: block; text-decoration: none;">
                                             <div class="widget-body">
@@ -140,36 +153,47 @@
                                        <?php
                                 $ocupadas = array();
                                 $placas = array();
+                                $id_veiculo_list = array(); 
 
                                 foreach ($vagas_ocupadas_medio as $vaga) {
 
                                     $ocupadas [] = $vaga->estacionar_numero_vaga;
+                                    $id_veiculo_list[] = $vaga->estacionar_id;
                                     $placas [$vaga->estacionar_numero_vaga] = $vaga->estacionar_placa_veiculo;
                                 }
+
                                 ?>
-                               
 
                                 <?php for ($i = 1; $i <= $numero_vagas_medio->vagas; $i++) : ?>
                                    <li class="list-inline-item">
                                  <?php if(in_array($i, $ocupadas)): ?>
-                                <div class="widget social-widget vaga" style="background-color: #ec5353; color: white">
-                                    <div class="widget-body">
-                                        <div data-toggle="tooltip" data-placement="bottom" title="Placa:&nbsp;<?php echo $placas[$i] ?>" class="content">
-                                            <i class="fas fa-truck-pickup fa-lg"></i>
+
+                                    <?php
+                                        // Encontrando o índice correto do ID do veículo no array $id_veiculo_list
+                                        $indice = array_search($i, $ocupadas);
+                                        // Obtendo o ID do veículo correspondente ao número da vaga
+                                        $id_veiculo = $id_veiculo_list[$indice];
+                                        $placa = $placas[$i];
+                                    ?>
+
+                                    <a href="<?php echo base_url('estacionar/core/' . $id_veiculo); ?>" style="text-decoration: none;">
+                                        <div class="widget social-widget vaga" style="background-color: #ec5353; color: white">
+                                            <div class="widget-body">
+                                                <div data-toggle="tooltip" data-placement="bottom" title="Placa:&nbsp;<?php echo $placas[$i] ?>" class="content">
+                                                    <i class="fas fa-truck-pickup fa-lg"></i>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </a>
                                 <?php else: ?>
 
-                                    <div class="widget social-widget vaga" style="background-color: <?php echo ($numero_vagas_medio->precificacao_ativa == 0 ? '#E5F9FF' : '#5dd55d;'); ?>; color: white">
-
-                                    <div class="widget-body">
-                                        <div data-toggle="tooltip" data-placement="bottom" title="<?php echo ($numero_vagas_medio->precificacao_ativa == 0 ? 'Desativado' : 'Livre'); ?>" class="content">
-                                           <div class="number"><?php echo ($numero_vagas_medio->precificacao_ativa == 0 ? '<i class="fas fa-ban text-white"></i>' : $i); ?></div>
+                                    <a href="<?php echo base_url('/estacionar/core?vaga=' . $i); ?>" class="widget social-widget vaga" style="background-color: <?php echo ($numero_vagas_medio->precificacao_ativa == 0 ? '#E5F9FF' : '#5dd55d;'); ?>; color: white; display: block; text-decoration: none;">
+                                        <div class="widget-body">
+                                            <div data-toggle="tooltip" data-placement="bottom" title="<?php echo ($numero_vagas_medio->precificacao_ativa == 0 ? 'Desativado' : 'Livre'); ?>" class="content">
+                                                <div class="number"><?php echo ($numero_vagas_medio->precificacao_ativa == 0 ? '<i class="fas fa-ban text-white"></i>' : $i); ?></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-
+                                    </a>
                                 <?php endif; ?>
                                 </li>
                                 <?php endfor;?>
@@ -195,12 +219,14 @@
                                 <ul class="list-inline mt-15 text-center">
 
                                 <?php
-                                $ocupadas = array();
+                                $id_veiculo_list = array();
                                 $placas = array();
+                                $ocupadas = array();
 
                                 foreach ($vagas_ocupadas_grande as $vaga) {
 
                                     $ocupadas [] = $vaga->estacionar_numero_vaga;
+                                    $id_veiculo_list[] = $vaga->estacionar_id;
                                     $placas [$vaga->estacionar_numero_vaga] = $vaga->estacionar_placa_veiculo;
                                 }
                                 ?>
@@ -208,24 +234,32 @@
                                 <?php for ($i = 1; $i <= $numero_vagas_grande->vagas; $i++) : ?>
                                         <li class="list-inline-item">
                                  <?php if(in_array($i, $ocupadas)): ?>
-                                <div class="widget social-widget vaga" style="background-color: #ec5353; color: white">
-                                    <div class="widget-body">
-                                        <div data-toggle="tooltip" data-placement="bottom" title="Placa:&nbsp;<?php echo $placas[$i] ?>" class="content">
-                                            <i class="fas fa-truck fa-lg"></i>
+                                    <?php
+                                        // Encontrando o índice correto do ID do veículo no array $id_veiculo_list
+                                        $indice = array_search($i, $ocupadas);
+                                        // Obtendo o ID do veículo correspondente ao número da vaga
+                                        $id_veiculo = $id_veiculo_list[$indice];
+                                        $placa = $placas[$i];
+                                    ?>
+                        
+                                    <a href="<?php echo base_url('estacionar/core/' . $id_veiculo); ?>" style="text-decoration: none;">
+                                        <div class="widget social-widget vaga" style="background-color: #ec5353; color: white">
+                                            <div class="widget-body">
+                                                <div data-toggle="tooltip" data-placement="bottom" title="Placa:&nbsp;<?php echo $placas[$i] ?>" class="content">
+                                                    <i class="fas fa-truck fa-lg"></i>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </a>
                                 <?php else: ?>
 
-                                    <div class="widget social-widget vaga" style="background-color: <?php echo ($numero_vagas_grande->precificacao_ativa == 0 ? '#E5F9FF;' : '#5dd55d;'); ?>; color: white">
-
-                                    <div class="widget-body">
-                                        <div data-toggle="tooltip" data-placement="bottom" title="<?php echo ($numero_vagas_grande->precificacao_ativa == 0 ? 'Desativado' : 'Livre'); ?>" class="content">
-                                           <div class="number"><?php echo ($numero_vagas_grande->precificacao_ativa == 0 ? '<i class="fas fa-ban text-white"></i>' : $i); ?></div>
+                                    <a href="<?php echo base_url('/estacionar/core?vaga=' . $i); ?>" class="widget social-widget vaga" style="background-color: <?php echo ($numero_vagas_grande->precificacao_ativa == 0 ? '#E5F9FF' : '#5dd55d;'); ?>; color: white; display: block; text-decoration: none;">
+                                        <div class="widget-body">
+                                            <div data-toggle="tooltip" data-placement="bottom" title="<?php echo ($numero_vagas_grande->precificacao_ativa == 0 ? 'Desativado' : 'Livre'); ?>" class="content">
+                                                <div class="number"><?php echo ($numero_vagas_grande->precificacao_ativa == 0 ? '<i class="fas fa-ban text-white"></i>' : $i); ?></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-
+                                    </a>
                                 <?php endif; ?>
                                 </li>
                                 <?php endfor;?>
@@ -252,33 +286,46 @@
                                        <?php
                                 $ocupadas = array();
                                 $placas = array();
+                                $id_veiculo_list = array();
 
                                 foreach ($vagas_ocupadas_moto as $vaga) {
 
                                     $ocupadas [] = $vaga->estacionar_numero_vaga;
+                                    $id_veiculo_list[] = $vaga->estacionar_id;
                                     $placas [$vaga->estacionar_numero_vaga] = $vaga->estacionar_placa_veiculo;
                                 }
                                 ?>
                                 <?php for ($i = 1; $i <= $numero_vagas_moto->vagas; $i++) : ?>
-                                                   <li class="list-inline-item">
-                                 <?php if(in_array($i, $ocupadas)): ?>
-                                <div class="widget social-widget vaga" style="background-color: #ec5353; color: white">
-                                    <div class="widget-body">
-                                        <div data-toggle="tooltip" data-placement="bottom" title="Placa:&nbsp;<?php echo $placas[$i] ?>" class="content">
-                                            <i class="fas fa-motorcycle fa-lg"></i>
+                                <li class="list-inline-item">
+                                 
+                                <?php if(in_array($i, $ocupadas)): ?>
+
+                                    <?php
+                                        // Encontrando o índice correto do ID do veículo no array $id_veiculo_list
+                                        $indice = array_search($i, $ocupadas);
+                                        // Obtendo o ID do veículo correspondente ao número da vaga
+                                        $id_veiculo = $id_veiculo_list[$indice];
+                                        $placa = $placas[$i];
+                                    ?>
+
+                                    <a href="<?php echo base_url('estacionar/core/' . $id_veiculo); ?>" style="text-decoration: none;">
+                                        <div class="widget social-widget vaga" style="background-color: #ec5353; color: white">
+                                            <div class="widget-body">
+                                                <div data-toggle="tooltip" data-placement="bottom" title="Placa:&nbsp;<?php echo $placas[$i] ?>" class="content">
+                                                    <i class="fas fa-motorcycle fa-lg"></i>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </a>
                                 <?php else: ?>
 
-                                    <div class="widget social-widget vaga" style="background-color: <?php echo ($numero_vagas_moto->precificacao_ativa == 0 ? '#E5F9FF;' : '#5dd55d;'); ?>; color: white">
-
-                                    <div class="widget-body">
-                                        <div data-toggle="tooltip" data-placement="bottom" title="<?php echo ($numero_vagas_moto->precificacao_ativa == 0 ? 'Desativado' : 'Livre'); ?>" class="content">
-                                           <div class="number"><?php echo ($numero_vagas_moto->precificacao_ativa == 0 ? '<i class="fas fa-ban text-white"></i>' : $i); ?></div>
+                                    <a href="<?php echo base_url('/estacionar/core?vaga=' . $i); ?>" class="widget social-widget vaga" style="background-color: <?php echo ($numero_vagas_moto->precificacao_ativa == 0 ? '#E5F9FF' : '#5dd55d;'); ?>; color: white; display: block; text-decoration: none;">
+                                        <div class="widget-body">
+                                            <div data-toggle="tooltip" data-placement="bottom" title="<?php echo ($numero_vagas_moto->precificacao_ativa == 0 ? 'Desativado' : 'Livre'); ?>" class="content">
+                                                <div class="number"><?php echo ($numero_vagas_moto->precificacao_ativa == 0 ? '<i class="fas fa-ban text-white"></i>' : $i); ?></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </a>
 
                                 <?php endif; ?>
                                 </li>
