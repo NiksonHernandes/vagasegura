@@ -85,9 +85,10 @@
 
     <div class="col-md-4 mb-3">
         <label for="">Número vaga</label>
-        <input placeholder="Insira o número da vaga"  type="number" class="form-control" name="estacionar_numero_vaga" value="<?php echo (isset($estacionado) ? $estacionado->estacionar_numero_vaga : set_value('estacionar_numero_vaga')) ?>" <?php echo (isset($estacionado) ? 'readonly' : '') ?>>
+        <input placeholder="Insira o número da vaga"  type="number" class="form-control" name="estacionar_numero_vaga" value="<?php echo isset($_GET['vaga']) ? $_GET['vaga'] : (isset($estacionado) ? $estacionado->estacionar_numero_vaga : set_value('estacionar_numero_vaga')) ?>" <?php echo (isset($estacionado) ? 'readonly' : '') ?>>
         <?php echo form_error('estacionar_numero_vaga', '<div class="text-danger">', '</div>') ?>
     </div>
+
 
 </div>
 
@@ -247,8 +248,3 @@
                 </footer>
                 
             </div>
-
-
-
-
-        
